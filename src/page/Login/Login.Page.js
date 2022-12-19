@@ -1,7 +1,29 @@
+import UserController from "../../services/Controllers/User.Controller";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 function Login() {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [verifie, setverifie] = useState(false);
+  const login = () => {
+    UserController.login({ email: email, password: password })
+      .then((response) => {
+        console.log(" response of login  ", response);
+        if(response.status===200){
+          setverifie(true)
+        }
+      })    
+      .catch((err) => {
+        console.log( "error of login ",err);
+      });
+      
+  };
     return (<div>
   <div className="container">
     {/* Outer Row */}
+    {verifie && (
+          <Navigate to="/" replace={true} />
+        )}
     <div className="row justify-content-center">
       <div className="col-xl-10 col-lg-12 col-md-9">
         <div className="card o-hidden border-0 shadow-lg my-5">
@@ -16,10 +38,10 @@ function Login() {
                   </div>
                   <form className="user">
                     <div className="form-group">
-                      <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                      <input type="email" onChange={(e)=>setemail(e.target.value)} className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." />
                     </div>
                     <div className="form-group">
-                      <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password" />
+                      <input type="password" onChange={(e)=>setpassword(e.target.value)} className="form-control form-control-user" id="exampleInputPassword" placeholder="Password" />
                     </div>
                     <div className="form-group">
                       <div className="custom-control custom-checkbox small">
@@ -28,14 +50,14 @@ function Login() {
                           Me</label>
                       </div>
                     </div>
-                    <a href="index.html" className="btn btn-primary btn-user btn-block">
+                    <a onClick={()=>login()} className="btn btn-primary btn-user btn-block">
                       Login
                     </a>
                     <hr />
-                    <a href="index.html" className="btn btn-google btn-user btn-block">
+                    <a  className="btn btn-google btn-user btn-block">
                       <i className="fab fa-google fa-fw" /> Login with Google
                     </a>
-                    <a href="index.html" className="btn btn-facebook btn-user btn-block">
+                    <a  className="btn btn-facebook btn-user btn-block">
                       <i className="fab fa-facebook-f fa-fw" /> Login with Facebook
                     </a>
                   </form>

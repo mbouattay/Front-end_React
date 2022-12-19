@@ -9,7 +9,7 @@ function Wishlist() {
       setWishlist(response.data)
     })
     .catch((err)=>{console.log("error of  ",err)}) ;
-  }, [wishlist]);
+  }, []);
   return (
     <div className="wishlist-box-main">
       <div className="container">
@@ -28,7 +28,7 @@ function Wishlist() {
                   </tr>
                 </thead>
                 <tbody>
-                  {wishlist.map((data)=>(
+                  {wishlist.map((e)=>(
                       <tr>
                       <td className="thumbnail-img">
                         <a >
@@ -40,10 +40,10 @@ function Wishlist() {
                         </a>
                       </td>
                       <td className="name-pr">
-                        <a href="#">{data.Produit.nom}</a>
+                        <a href="#">{e._id}</a>
                       </td>
                       <td className="price-pr">
-                        <p>{data.Produit.prix} DT</p>
+                        <p>DT</p>
                       </td>
                       <td className="quantity-box">In Stock</td>
                       <td className="add-pr">
