@@ -2,14 +2,18 @@ import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import produitController from "../../services/Controllers/Produit.Controller";
 import wishlistController from "../../services/Controllers/Wishliste.Controller";
-function Produit() {
 
-  const [produit, setproduit] = useState([]);  
+
+function Produit() {
+  
+  const [produit, setproduit] = useState([]);   
+
   useEffect(() => {
     produitController.getAll()
     .then((response)=>{
-      console.log("data users",response)
+      console.log("data produit",response)
       setproduit(response.data)
+      
     })
     .catch((err)=>{console.log("error of  ",err)}) ;
   }, []);
@@ -25,6 +29,9 @@ function Produit() {
             console.log("err of",err) ;
         })
   }
+
+
+
   return (
     <>
       <div className="products-box">
@@ -32,7 +39,7 @@ function Produit() {
           <div className="row">
             <div className="col-lg-12">
               <div className="title-all text-center">
-                <h1>Our Gallery</h1>
+                <h1>Our Gallery </h1>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                   sit amet lacus enim.
@@ -60,15 +67,15 @@ function Produit() {
             </div>
           </div>
           <div className="row special-list">
-            {produit.map((data)=>(
-                  <div className="col-lg-3 col-md-6 special-grid bulbs">
+            {produit.map((data,index)=>(
+                  <div key={index} className="col-lg-3 col-md-6 special-grid bulbs">
                   <div className="products-single fix">
                     <div className="box-img-hover">
                       <div className="type-lb">
                         <p className="sale">{data.nom}</p>
                       </div>
                       <img
-                        src="images/gallery-img-01.jpg"
+                        src="images/instagram-img-08.jpg"
                         className="img-fluid"
                         alt="Image"
                       />

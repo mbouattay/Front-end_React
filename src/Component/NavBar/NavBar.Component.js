@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../../ContextApi/User.Context";
 function NavBar() {
+  const {value,setvalue}=useContext(UserContext) ;
     return ( <div>
              {/* Start Main Top */}
         <header className="main-header">
@@ -41,13 +44,18 @@ function NavBar() {
                       Produit
                   </Link>
                   </li>
-                  <li className="nav-item active">
-                    <Link to={"/wishlist"} className="nav-link" href="">
+                  <li className="nav-item ">
+                    <Link to={"/wishlist"} className="nav-link" >
                       Wishlist
                     </Link>
                   </li>
+                  <li className="nav-item ">
+                    <Link to={"#"} className="nav-link">
+                    {value?.user?.nom}
+                    </Link>
+                  </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="">
+                    <a className="nav-link">
                       Logout
                     </a>
                   </li>

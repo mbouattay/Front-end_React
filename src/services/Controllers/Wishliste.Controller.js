@@ -6,7 +6,7 @@ const Add = (data)=>{
     return http.post("/wishlist",data)
 }
 const remove =(id)=>{
-    return http.delete("/wishlist"+id)
+    return http.delete("/wishlist/"+id)
 }
 const wishlistController = {
     getAll,
